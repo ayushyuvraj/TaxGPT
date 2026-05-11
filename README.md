@@ -205,12 +205,15 @@ cd frontend && npm run dev
 
 Then open **http://localhost:5173** in your browser. The app will load with the knowledge base ready (7,905 tax law vectors pre-loaded).
 
-**Add Your API Keys:** When the app opens, click the settings icon or "Configure Providers" button in the top right. Paste your API keys there:
-- **OPENAI_API_KEY** (required for embeddings) — Get it from [openai.com](https://platform.openai.com/api-keys)
-- **One generation provider** (pick one):
-  - **GEMINI_API_KEY** (free tier available) — Get it from [aistudio.google.com](https://aistudio.google.com)
-  - **ANTHROPIC_API_KEY** — Get it from [console.anthropic.com](https://console.anthropic.com)
-  - **OPENROUTER_API_KEY** — Get it from [openrouter.ai](https://openrouter.ai)
+**Add Your API Key:** When the app opens, click the settings icon or "Configure Providers" button in the top right.
+
+**You only need ONE API key:**
+- **OPENAI_API_KEY** — Get it from [platform.openai.com/api-keys](https://platform.openai.com/api-keys) (handles both embeddings and generation)
+
+**Optional — use a different generation provider:**
+- **GEMINI_API_KEY** (free tier available) — Get it from [aistudio.google.com](https://aistudio.google.com) *(Dual-index support in progress)*
+- **ANTHROPIC_API_KEY** — Get it from [console.anthropic.com](https://console.anthropic.com)
+- **OPENROUTER_API_KEY** — Get it from [openrouter.ai](https://openrouter.ai)
 
 The Dashboard will show `Knowledge Index: 7905 vectors · Ready` once the app fully loads.
 
