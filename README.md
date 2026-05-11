@@ -32,24 +32,24 @@ Generic AI tools hallucinate about this. They confidently cite sections that no 
 
 ## ✨ What's Inside
 
-### 🤖 AI Assistant GenNext — Zero-Hallucination Tax Q&A
+### 🤖 AI Assistant GenNext : Zero-Hallucination Tax Q&A
 
 Ask any question about the new Act and get a streaming answer with inline citations to the exact sections it pulled from.
 
-- **Real-time SSE streaming** — words appear as the model generates them, just like ChatGPT
-- **Multi-conversation history** — collapsible sidebar with unlimited named conversations, rename/delete, keyboard shortcuts
-- **Document analysis** — attach a PDF, JPG, or PNG (e.g. your Form 130 or a tax computation sheet) and ask questions about it
-- **Invoice mode** — toggle to switch the model's context to invoice/receipt analysis
-- **Inline citations** — every claim links to the exact Act section with the full text in a popup
-- **Source pills** — all referenced sections and PDF sources shown below the answer, each clickable
-- **Content filter bypass** — in a multi-turn conversation, follow-up questions flow naturally without repeated validation
-- **Contextual query rewriting** — the engine rewrites your question using chat context before searching the index, so "what about the previous section?" actually works
+- **Real-time SSE streaming** : words appear as the model generates them, just like ChatGPT
+- **Multi-conversation history** : collapsible sidebar with unlimited named conversations, rename/delete, keyboard shortcuts
+- **Document analysis** : attach a PDF, JPG, or PNG (e.g. your Form 130 or a tax computation sheet) and ask questions about it
+- **Invoice mode** : toggle to switch the model's context to invoice/receipt analysis
+- **Inline citations** : every claim links to the exact Act section with the full text in a popup
+- **Source pills** : all referenced sections and PDF sources shown below the answer, each clickable
+- **Content filter bypass** : in a multi-turn conversation, follow-up questions flow naturally without repeated validation
+- **Contextual query rewriting** : the engine rewrites your question using chat context before searching the index, so "what about the previous section?" actually works
 
 > **Powered by 7,905 vectors** from 6 official PDFs: Income Tax Act 2025 (amended), Income Tax Rules 2026, Finance Bill 2026, 536 individual section PDFs, and 16 schedule PDFs.
 
 ---
 
-### 🧠 Personal Tax Intelligence Dashboard — Know Your Exact Tax Position
+### 🧠 Personal Tax Intelligence Dashboard : Know Your Exact Tax Position
 
 Select your profile, enter your numbers, and get a complete tax intelligence report in seconds.
 
@@ -65,52 +65,52 @@ Select your profile, enter your numbers, and get a complete tax intelligence rep
 
 **What you see after analysis:**
 
-**Tax Health Score** — A single number (0–100) with a letter grade (A+ to D) shown inside an animated SVG ring. The score breaks down across four pillars:
-- *Regime (25 pts)* — are you on the winning regime for your income profile?
-- *Deductions (40 pts)* — how much of your available savings space are you using?
-- *Compliance (25 pts)* — any overdue deadlines eating into your score?
-- *Filing Readiness (10 pts)* — are your documents and advance tax in order?
+**Tax Health Score** : A single number (0–100) with a letter grade (A+ to D) shown inside an animated SVG ring. The score breaks down across four pillars:
+- *Regime (25 pts)* : are you on the winning regime for your income profile?
+- *Deductions (40 pts)* : how much of your available savings space are you using?
+- *Compliance (25 pts)* : any overdue deadlines eating into your score?
+- *Filing Readiness (10 pts)* : are your documents and advance tax in order?
 
-**Tax Waterfall Chart** — A stacked bar chart showing exactly how your income flows through each tax slab. Hover any bar to see the rate, income in slab, and tax on that slab. One glance tells you whether you're mostly in the 5% band or the 30% band.
+**Tax Waterfall Chart** : A stacked bar chart showing exactly how your income flows through each tax slab. Hover any bar to see the rate, income in slab, and tax on that slab. One glance tells you whether you're mostly in the 5% band or the 30% band.
 
-**New vs Old Regime Comparison** — Side-by-side bars with the winner highlighted. Shows effective rate for both regimes, the saving amount, and a full deduction breakdown so you understand *why* one regime wins for your situation.
+**New vs Old Regime Comparison** : Side-by-side bars with the winner highlighted. Shows effective rate for both regimes, the saving amount, and a full deduction breakdown so you understand *why* one regime wins for your situation.
 
-**Savings Ranker** — Every applicable tax-saving opportunity ranked by potential saving. Each row shows:
+**Savings Ranker** : Every applicable tax-saving opportunity ranked by potential saving. Each row shows:
 - The exact saving in ₹, the Act section, and the required effort (Zero / Low / Medium / High)
 - A utilization bar showing current vs maximum deduction amount
-- A checkbox — mark it done to instantly watch your Tax Health Score ring animate upward
+- A checkbox : mark it done to instantly watch your Tax Health Score ring animate upward
 
-**Compliance Calendar** — A chronological timeline of every deadline that applies to your profile: filing dates, advance tax instalments, investment cut-offs, and transition deadlines. Color-coded by urgency (red ≤14 days, amber ≤30 days).
+**Compliance Calendar** : A chronological timeline of every deadline that applies to your profile: filing dates, advance tax instalments, investment cut-offs, and transition deadlines. Color-coded by urgency (red ≤14 days, amber ≤30 days).
 
-**Saved Profiles Panel** — Save any analysis as a named snapshot. Up to 10 snapshots persist in localStorage. Come back tomorrow, load your saved analysis, and your score, waterfall, ranker checkboxes, and compliance calendar are all restored. The sidebar nav item pulses red when a saved deadline is within 7 days.
+**Saved Profiles Panel** : Save any analysis as a named snapshot. Up to 10 snapshots persist in localStorage. Come back tomorrow, load your saved analysis, and your score, waterfall, ranker checkboxes, and compliance calendar are all restored. The sidebar nav item pulses red when a saved deadline is within 7 days.
 
 ---
 
-### 🗺️ Section Mapper — Navigate the Old → New Act Instantly
+### 🗺️ Section Mapper : Navigate the Old → New Act Instantly
 
 The entire mapping of 1961 Act sections to 2025 Act sections, loaded offline from JSON. No API call. No wait time.
 
 - Type "80C" → instantly see Section 123, what changed, and why
 - Covers sections, forms (Form 16 → Form 130, Form 26AS → Form 168), and concepts (Assessment Year → Tax Year)
-- **Category Bento Grid** — browse mappings by category: deductions, TDS, returns, assessment, exemptions, general
+- **Category Bento Grid** : browse mappings by category: deductions, TDS, returns, assessment, exemptions, general
 - Each category expands to show every entry with old → new at a glance
-- Fully offline — works even without an API key configured
+- Fully offline : works even without an API key configured
 
 ---
 
-### ↔️ Compare Acts — Read Both Laws Side by Side
+### ↔️ Compare Acts : Read Both Laws Side by Side
 
-Select any section from the 1961 Act on the left and the 2025 Act on the right, and read them simultaneously. Stop guessing what changed — see it.
+Select any section from the 1961 Act on the left and the 2025 Act on the right, and read them simultaneously. Stop guessing what changed : see it.
 
 - Two independent searchable dropdowns (530+ sections each)
 - Full section text extracted from official PDFs
 - Auto-match: select an old section, the corresponding new section highlights automatically
 - "What Changed" summary badge for every mapped section
-- Works for sections with no direct mapping too — useful for studying the structure of the new Act
+- Works for sections with no direct mapping too : useful for studying the structure of the new Act
 
 ---
 
-### 📄 Notice Decoder — Understand Any Tax Notice in Plain English
+### 📄 Notice Decoder : Understand Any Tax Notice in Plain English
 
 Receive a notice from the Income Tax Department? Paste the text, click Analyze, and get:
 
@@ -123,7 +123,7 @@ No more panic. No more expensive CA consultations for a routine 270(1) intimatio
 
 ---
 
-### 🎛️ Five AI Providers — Use Whatever You Have
+### 🎛️ Five AI Providers : Use Whatever You Have
 
 TaxGPT works with every major AI provider. Switch anytime from the header.
 
@@ -159,7 +159,7 @@ python api/main.py
 cd frontend && npm run dev
 ```
 
-Open **http://localhost:5173** — the app loads with the knowledge base ready (7,905 vectors pre-indexed, no ingestion step needed). You'll be prompted to add your API keys in the application interface.
+Open **http://localhost:5173** : the app loads with the knowledge base ready (7,905 vectors pre-indexed, no ingestion step needed). You'll be prompted to add your API keys in the application interface.
 
 ---
 
@@ -169,11 +169,11 @@ Open **http://localhost:5173** — the app loads with the knowledge base ready (
 
 Before you start, make sure you have these three tools installed:
 
-1. **Python 3.11+** — [Download here](https://www.python.org/downloads/)
-2. **Git** — [Download here](https://git-scm.com/downloads)
-3. **Node.js 18+** — [Download here](https://nodejs.org/)
+1. **Python 3.11+** : [Download here](https://www.python.org/downloads/)
+2. **Git** : [Download here](https://git-scm.com/downloads)
+3. **Node.js 18+** : [Download here](https://nodejs.org/)
 
-### Step 1 — Clone & Install Dependencies
+### Step 1 : Clone & Install Dependencies
 
 ```bash
 # Clone the repository
@@ -189,16 +189,16 @@ npm install
 cd ..
 ```
 
-### Step 2 — Run the App
+### Step 2 : Run the App
 
 Open two terminal windows and run these commands:
 
-**Terminal 1 — Start the Backend:**
+**Terminal 1 : Start the Backend:**
 ```bash
 python api/main.py
 ```
 
-**Terminal 2 — Start the Frontend:**
+**Terminal 2 : Start the Frontend:**
 ```bash
 cd frontend && npm run dev
 ```
@@ -208,12 +208,12 @@ Then open **http://localhost:5173** in your browser. The app will load with the 
 **Add Your API Key:** When the app opens, click the settings icon or "Configure Providers" button in the top right.
 
 **You only need ONE API key:**
-- **OPENAI_API_KEY** — Get it from [platform.openai.com/api-keys](https://platform.openai.com/api-keys) (handles both embeddings and generation)
+- **OPENAI_API_KEY** : Get it from [platform.openai.com/api-keys](https://platform.openai.com/api-keys) (handles both embeddings and generation)
 
-**Optional — use a different generation provider:**
-- **GEMINI_API_KEY** (free tier available) — Get it from [aistudio.google.com](https://aistudio.google.com) *(Dual-index support in progress)*
-- **ANTHROPIC_API_KEY** — Get it from [console.anthropic.com](https://console.anthropic.com)
-- **OPENROUTER_API_KEY** — Get it from [openrouter.ai](https://openrouter.ai)
+**Optional : use a different generation provider:**
+- **GEMINI_API_KEY** (free tier available) : Get it from [aistudio.google.com](https://aistudio.google.com) *(Dual-index support in progress)*
+- **ANTHROPIC_API_KEY** : Get it from [console.anthropic.com](https://console.anthropic.com)
+- **OPENROUTER_API_KEY** : Get it from [openrouter.ai](https://openrouter.ai)
 
 The Dashboard will show `Knowledge Index: 7905 vectors · Ready` once the app fully loads.
 
@@ -270,11 +270,11 @@ TaxGPT v2.0/
 
 Every query goes through a 5-stage pipeline before reaching the LLM:
 
-1. **Context rewrite** — multi-turn conversations are rewritten into a standalone question using the last 3 turns
-2. **Old section detection** — if the query references a 1961 Act section, it's augmented with the 2025 equivalent before embedding
-3. **Hybrid search** — BM25 keyword search (top-20) fused with vector search (top-8), merged and deduplicated
-4. **Parent enrichment** — each retrieved child chunk is expanded with its parent section for full context
-5. **Reranking** — direct section matches bubble up; related sections and parent context follow
+1. **Context rewrite** : multi-turn conversations are rewritten into a standalone question using the last 3 turns
+2. **Old section detection** : if the query references a 1961 Act section, it's augmented with the 2025 equivalent before embedding
+3. **Hybrid search** : BM25 keyword search (top-20) fused with vector search (top-8), merged and deduplicated
+4. **Parent enrichment** : each retrieved child chunk is expanded with its parent section for full context
+5. **Reranking** : direct section matches bubble up; related sections and parent context follow
 
 The result: answers that cite the right section, not just the nearest one.
 
@@ -330,7 +330,7 @@ Yes. Set `LLM_PROVIDER=ollama` and point it at your Ollama instance. You still n
 The Section Mapper handles old→new mappings instantly from JSON. The AI assistant understands old section numbers (e.g. "What is 80C?") and answers using the new Act, explicitly noting the section has moved.
 
 **How accurate are the tax calculations?**
-The tax computation engine implements the slab rates, standard deduction, rebate, surcharge, and cess exactly as defined in the Finance Act 2026. It is provided for educational purposes — always verify with a qualified CA for actual tax filing.
+The tax computation engine implements the slab rates, standard deduction, rebate, surcharge, and cess exactly as defined in the Finance Act 2026. It is provided for educational purposes : always verify with a qualified CA for actual tax filing.
 
 **Is my data sent anywhere?**
 Your API keys stay in `localStorage` on your machine. Queries go directly from your browser to your chosen AI provider (Gemini, OpenAI, etc.) via the local backend. Nothing is logged to any third-party service.
@@ -341,7 +341,7 @@ Your API keys stay in `localStorage` on your machine. Queries go directly from y
 
 This project represents hundreds of hours of work to make Indian tax law accessible to every taxpayer who reads English or Hindi.
 
-If TaxGPT helped you understand the new Act, saved you a CA consultation fee, or just impressed you — **please star this repository.** It takes 2 seconds and means a lot.
+If TaxGPT helped you understand the new Act, saved you a CA consultation fee, or just impressed you : **please star this repository.** It takes 2 seconds and means a lot.
 
 [![Star This Repository](https://img.shields.io/badge/⭐_Star_This_Repo-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayushyuvraj/TaxGPT)
 
@@ -353,7 +353,7 @@ Found something impressive? Figured out a tricky deduction? Got a great answer a
 
 ### Contributing
 
-Pull requests are welcome. If you find a section mapping that's wrong, a calculation that doesn't match the Act, or a UI bug — open an issue. Every contribution helps 80 million taxpayers.
+Pull requests are welcome. If you find a section mapping that's wrong, a calculation that doesn't match the Act, or a UI bug : open an issue. Every contribution helps 80 million taxpayers.
 
 ```bash
 # Fork → clone → create branch → make changes → open PR
@@ -361,16 +361,16 @@ git checkout -b fix/section-mapping-80ccd
 ```
 
 Areas where contributions are especially valuable:
-- **Section mapping corrections** — `data/section_mapping.json` is the offline backbone
-- **Prompt improvements** — `src/prompts.py` contains all LLM templates
-- **New taxpayer profiles** — add to `src/tax_calculator.py`
-- **Hindi language support** — the engine detects Hindi queries, responses can be improved
+- **Section mapping corrections** : `data/section_mapping.json` is the offline backbone
+- **Prompt improvements** : `src/prompts.py` contains all LLM templates
+- **New taxpayer profiles** : add to `src/tax_calculator.py`
+- **Hindi language support** : the engine detects Hindi queries, responses can be improved
 
 ---
 
 ## 📄 License
 
-MIT License — use it, fork it, build on it. A credit back to this repository is appreciated.
+MIT License : use it, fork it, build on it. A credit back to this repository is appreciated.
 
 ---
 
