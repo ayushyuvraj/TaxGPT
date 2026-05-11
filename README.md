@@ -6,7 +6,7 @@
 
 *Zero-hallucination answers · Real-time streaming · Personalized tax intelligence*
 
-[![⭐ Star This Repo](https://img.shields.io/badge/⭐_Star_This_Repo-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayushyuvraj/AtlasWorks/stargazers)
+[![⭐ Star This Repo](https://img.shields.io/badge/⭐_Star_This_Repo-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayushyuvraj/TaxGPT/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
@@ -143,8 +143,8 @@ TaxGPT works with every major AI provider. Switch anytime from the header.
 
 ```bash
 # Clone
-git clone https://github.com/ayushyuvraj/AtlasWorks.git
-cd "AtlasWorks/TaxGPT v2.0"
+git clone https://github.com/ayushyuvraj/TaxGPT.git
+cd TaxGPT
 
 # Configure — add your API keys
 cp .env.example .env
@@ -356,7 +356,7 @@ This project represents hundreds of hours of work to make Indian tax law accessi
 
 If TaxGPT helped you understand the new Act, saved you a CA consultation fee, or just impressed you — **please star this repository.** It takes 2 seconds and means a lot.
 
-[![Star This Repository](https://img.shields.io/badge/⭐_Star_This_Repo-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayushyuvraj/AtlasWorks)
+[![Star This Repository](https://img.shields.io/badge/⭐_Star_This_Repo-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayushyuvraj/TaxGPT)
 
 ### Share Your Experience
 
@@ -393,6 +393,6 @@ Built with obsession by **[Ayush Yuvraj](https://github.com/ayushyuvraj)**
 
 *Because every Indian taxpayer deserves to understand the law that governs them.*
 
-**[⭐ Star this project](https://github.com/ayushyuvraj/AtlasWorks)** · **[🐛 Report a bug](https://github.com/ayushyuvraj/AtlasWorks/issues)** · **[💡 Request a feature](https://github.com/ayushyuvraj/AtlasWorks/issues)**
+**[⭐ Star this project](https://github.com/ayushyuvraj/TaxGPT)** · **[🐛 Report a bug](https://github.com/ayushyuvraj/TaxGPT/issues)** · **[💡 Request a feature](https://github.com/ayushyuvraj/TaxGPT/issues)**
 
 </div>
