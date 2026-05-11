@@ -339,7 +339,7 @@ Your API keys stay in `localStorage` on your machine. Queries go directly from y
 
 ## 🤝 Join the Community
 
-This project represents hundreds of hours of work to make Indian tax law accessible to every taxpayer who reads English or Hindi.
+Shipped in a few nights. Built to make Indian tax law accessible to every taxpayer who reads English or Hindi.
 
 If TaxGPT helped you understand the new Act, saved you a CA consultation fee, or just impressed you : **please star this repository.** It takes 2 seconds and means a lot.
 
