@@ -146,10 +146,6 @@ TaxGPT works with every major AI provider. Switch anytime from the header.
 git clone https://github.com/ayushyuvraj/TaxGPT.git
 cd TaxGPT
 
-# Configure — add your API keys
-cp .env.example .env
-# Edit .env: set OPENAI_API_KEY (required) + one generation key
-
 # Install Python dependencies
 pip install -r requirements.txt
 
@@ -163,7 +159,7 @@ python api/main.py
 cd frontend && npm run dev
 ```
 
-Open **http://localhost:5173** — the app loads with the knowledge base ready (7,905 vectors pre-indexed, no ingestion step needed).
+Open **http://localhost:5173** — the app loads with the knowledge base ready (7,905 vectors pre-indexed, no ingestion step needed). You'll be prompted to add your API keys in the application interface.
 
 ---
 
@@ -171,64 +167,52 @@ Open **http://localhost:5173** — the app loads with the knowledge base ready (
 
 ### Prerequisites
 
-| Tool | Minimum Version | Check |
-|------|----------------|-------|
-| Python | 3.11+ | `python --version` |
-| Node.js | 18+ | `node --version` |
-| npm | 9+ | `npm --version` |
+Before you start, make sure you have these three tools installed:
 
-### Step 1 — Configure API Keys
+1. **Python 3.11+** — [Download here](https://www.python.org/downloads/)
+2. **Git** — [Download here](https://git-scm.com/downloads)
+3. **Node.js 18+** — [Download here](https://nodejs.org/)
 
-Copy the example env file and open it in your editor:
+### Step 1 — Clone & Install Dependencies
 
 ```bash
-cp .env.example .env
-```
+# Clone the repository
+git clone https://github.com/ayushyuvraj/TaxGPT.git
+cd TaxGPT
 
-At minimum, set these two keys:
-
-```env
-# REQUIRED — for vector search (always needed)
-OPENAI_API_KEY=sk-...
-
-# REQUIRED — pick one generation provider
-GEMINI_API_KEY=your-key-here   # Free tier: aistudio.google.com
-# OR
-# ANTHROPIC_API_KEY=sk-ant-...
-# OR
-# OPENROUTER_API_KEY=sk-or-...
-```
-
-Set which provider to use for generation:
-```env
-LLM_PROVIDER=gemini   # or: openai, claude, openrouter, ollama
-```
-
-### Step 2 — Install Dependencies
-
-```bash
-# Python backend
+# Install Python dependencies
 pip install -r requirements.txt
 
-# React frontend
+# Install frontend dependencies
 cd frontend
 npm install
 cd ..
 ```
 
-### Step 3 — Run
+### Step 2 — Run the App
 
-Open two terminals:
+Open two terminal windows and run these commands:
 
+**Terminal 1 — Start the Backend:**
 ```bash
-# Terminal 1 — Backend (FastAPI on port 8000)
 python api/main.py
+```
 
-# Terminal 2 — Frontend (Vite on port 5173)
+**Terminal 2 — Start the Frontend:**
+```bash
 cd frontend && npm run dev
 ```
 
-The backend logs `Application startup complete.` within a few seconds. The frontend opens at **http://localhost:5173**. The Dashboard shows `Knowledge Index: 7905 vectors · Ready` confirming the index loaded.
+Then open **http://localhost:5173** in your browser. The app will load with the knowledge base ready (7,905 tax law vectors pre-loaded).
+
+**Add Your API Keys:** When the app opens, click the settings icon or "Configure Providers" button in the top right. Paste your API keys there:
+- **OPENAI_API_KEY** (required for embeddings) — Get it from [openai.com](https://platform.openai.com/api-keys)
+- **One generation provider** (pick one):
+  - **GEMINI_API_KEY** (free tier available) — Get it from [aistudio.google.com](https://aistudio.google.com)
+  - **ANTHROPIC_API_KEY** — Get it from [console.anthropic.com](https://console.anthropic.com)
+  - **OPENROUTER_API_KEY** — Get it from [openrouter.ai](https://openrouter.ai)
+
+The Dashboard will show `Knowledge Index: 7905 vectors · Ready` once the app fully loads.
 
 ---
 
