@@ -1,0 +1,308 @@
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Send, Loader, AlertCircle, Key, BookOpen, Database, X } from 'lucide-react'
+import { useQA } from '../hooks/useQA'
+import { useHealth } from '../hooks/useHealth'
+import { useChatStore } from '../store/chatStore'
+import { useApiKeyStore } from '../store/apiKeyStore'
+import { CitationModal } from './CitationModal'
+import { AnswerWithCitations } from './AnswerWithCitations'
+import type { Source } from '../lib/types'
+
+function SourcePills({ sources }: { sources?: Source[] }) {
+  const [selectedSource, setSelectedSource] = useState<Source | null>(null)
+
+  if (!sources || sources.length === 0) return null
+
+  const unique = Array.from(
+    new Map(sources.map(s => [s.section || s.source, s])).values()
+  )
+
+  const sectioned = unique.filter(s => s.section)
+  const filesOnly = unique.filter(s => !s.section)
+
+  return (
+    <div className="mt-3 pt-3 border-t border-white/8">
+      <div className="flex items-center gap-1.5 mb-2">
+        <BookOpen className="h-3 w-3 text-gray-500" />
+        <span className="text-xs text-gray-500 font-medium">Referenced sections</span>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {sectioned.map((s, i) => {
+          const actName = s.source
+            .replace(/\s*›\s*Section[-\s]\d+[A-Z]*/i, '')
+            .replace(/\s*›\s*Schedule[-\s]\d+[A-Z]*/i, '')
+            .replace(/\.pdf$/i, '')
+            .trim()
+          return (
+            <button
+              key={i}
+              onClick={() => setSelectedSource(s)}
+              className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs bg-indigo-500/10 border border-indigo-500/25 text-indigo-200 hover:bg-indigo-500/20 transition-colors"
+            >
+              <span className="font-mono font-semibold text-indigo-300">§{s.section}</span>
+              {actName && (
+                <span className="text-indigo-400/70 border-l border-indigo-500/25 pl-1.5">{actName}</span>
+              )}
+            </button>
+          )
+        })}
+        {filesOnly.map((s, i) => (
+          <button
+            key={`f-${i}`}
+            onClick={() => setSelectedSource(s)}
+            className="inline-flex items-center rounded-md px-2.5 py-1 text-xs bg-white/5 border border-white/10 text-gray-400 hover:bg-white/10 transition-colors"
+          >
+            {s.source.replace(/\.pdf$/i, '').replace(/_/g, ' ')}
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {selectedSource && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            onClick={() => setSelectedSource(null)}
+          >
+            <motion.div
+              className="max-w-2xl w-full bg-[#161b22] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5">
+                <div className="flex items-center gap-2">
+                  <BookOpen className="h-4 w-4 text-indigo-400" />
+                  <h3 className="text-sm font-bold text-white">Evidence: {selectedSource.section ? `§${selectedSource.section}` : selectedSource.source}</h3>
+                </div>
+                <button
+                  onClick={() => setSelectedSource(null)}
+                  className="p-1 rounded-lg hover:bg-white/10 text-gray-400 transition-colors"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+              <div className="p-6 max-h-[70vh] overflow-y-auto">
+                <div className="text-xs text-gray-500 mb-3 font-mono uppercase tracking-wider">
+                  Source: {selectedSource.source}
+                </div>
+                <div className="text-sm text-gray-300 leading-relaxed bg-white/5 p-4 rounded-xl border border-white/5 italic">
+                  "{selectedSource.text || 'No text content available for this source.'}"
+                </div>
+              </div>
+              <div className="px-6 py-4 bg-white/5 border-t border-white/10 flex justify-end">
+                <button
+                  onClick={() => setSelectedSource(null)}
+                  className="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-500 transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+interface QATabProps {
+  onOpenSettings?: () => void
+}
+
+export function QATab({ onOpenSettings }: QATabProps) {
+  const [question, setQuestion] = useState('')
+  const [selectedCitation, setSelectedCitation] = useState<Source | null>(null)
+  const { mutate, isPending, error } = useQA()
+  const { history: chatHistory, clearHistory } = useChatStore()
+  const { provider, geminiKey, anthropicKey, openaiKey, openrouterKey, ollamaUrl } = useApiKeyStore()
+  const { data: health } = useHealth()
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const indexEmpty = health !== undefined && health.vector_count === 0
+
+  const apiKey =
+    provider === 'gemini' ? geminiKey :
+    provider === 'anthropic' ? anthropicKey :
+    provider === 'openai' ? openaiKey :
+    provider === 'openrouter' ? openrouterKey :
+    provider === 'ollama' ? ollamaUrl : ''
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [chatHistory])
+
+  const MIN_CHARS = 10
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (question.trim().length < MIN_CHARS || !apiKey) return
+
+    mutate(
+      {
+        question: question.trim(),
+        chat_history: chatHistory,
+        language: 'en',
+      }
+    )
+    setQuestion('')
+  }
+
+  if (!apiKey) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex flex-col items-center justify-center min-h-96 rounded-2xl border border-amber-500/20 bg-amber-500/5 backdrop-blur-2xl text-center p-8"
+      >
+        <AlertCircle className="h-12 w-12 text-amber-400 mb-4" />
+        <h3 className="text-xl font-bold text-white mb-2">API Key Required</h3>
+        <p className="text-gray-400 text-sm mb-6">
+          Configure at least one AI provider to use the assistant
+        </p>
+        {onOpenSettings && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onOpenSettings}
+            className="flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:shadow-lg hover:shadow-indigo-500/30 transition-all"
+          >
+            <Key className="h-4 w-4" />
+            Configure Providers
+          </motion.button>
+        )}
+      </motion.div>
+    )
+  }
+
+  return (
+    <div className="flex flex-col h-full w-full bg-[#0d1117]/70 backdrop-blur-2xl relative">
+      {indexEmpty && (
+        <div className="flex items-start gap-3 px-5 py-3 bg-amber-500/10 border-b border-amber-500/20">
+          <Database className="h-4 w-4 text-amber-400 mt-0.5 shrink-0" />
+          <p className="text-xs text-amber-300 leading-relaxed">
+            <span className="font-semibold">Knowledge base is empty.</span> Answers below come from the model's own training, not from indexed Act PDFs — so no sections can be cited.
+            Go to <span className="font-semibold">Dashboard → Ingest</span> to build the index from your PDFs.
+          </p>
+        </div>
+      )}
+
+      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
+        <AnimatePresence>
+          {chatHistory.length === 0 ? (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex flex-col items-center justify-center h-full text-center"
+            >
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-indigo-500/20 bg-indigo-500/10 mb-4">
+                <span className="text-3xl">💡</span>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Ask TaxGPT</h3>
+              <p className="text-gray-500 text-sm max-w-xs">
+                Get instant answers about the new Income Tax Act 2025. Ask about sections, deductions, forms, and more.
+              </p>
+            </motion.div>
+          ) : (
+            chatHistory.map((msg, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.05 }}
+                className="space-y-3"
+              >
+                <div className="flex justify-end">
+                  <div className="max-w-xs lg:max-w-md bg-indigo-600 text-white rounded-2xl rounded-tr-sm p-4 shadow-lg">
+                    <p className="text-sm">{msg.question}</p>
+                  </div>
+                </div>
+
+                <div className="flex justify-start">
+                  <div className="max-w-xs lg:max-w-2xl bg-white/8 border border-white/10 text-gray-100 rounded-2xl rounded-tl-sm p-4">
+                    <AnswerWithCitations
+                      answer={msg.answer}
+                      sources={msg.sources}
+                      onCitationClick={setSelectedCitation}
+                    />
+                    <SourcePills sources={msg.sources} />
+                  </div>
+                </div>
+              </motion.div>
+            ))
+          )}
+        </AnimatePresence>
+
+        {isPending && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex gap-2 items-center text-gray-400"
+          >
+            <Loader className="h-4 w-4 animate-spin" />
+            <span className="text-sm">Thinking...</span>
+          </motion.div>
+        )}
+
+        {error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg p-3 text-sm"
+          >
+            Error: {error.message}
+          </motion.div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      <div className="border-t border-white/8 bg-[#0d1117]/50 px-6 py-4">
+        <form onSubmit={handleSubmit} className="flex gap-3">
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Ask about sections, deductions, forms..."
+              disabled={isPending}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-indigo-500/50 disabled:opacity-50"
+            />
+            {question.length > 0 && question.length < MIN_CHARS && (
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-amber-400">
+                {MIN_CHARS - question.length} more chars
+              </span>
+            )}
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            type="submit"
+            disabled={question.trim().length < MIN_CHARS || isPending}
+            className="flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-violet-600 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-indigo-500/30 transition-all"
+          >
+            {isPending ? <Loader className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+            {isPending ? 'Sending' : 'Send'}
+          </motion.button>
+        </form>
+
+        {chatHistory.length > 0 && (
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            onClick={clearHistory}
+            className="mt-3 w-full text-xs text-gray-500 hover:text-gray-300 transition-colors"
+          >
+            Clear conversation
+          </motion.button>
+        )}
+      </div>
+
+      <CitationModal citation={selectedCitation} onClose={() => setSelectedCitation(null)} />
+    </div>
+  )
+}

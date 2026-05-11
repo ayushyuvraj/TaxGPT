@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+* { scrollbar-width: none; -ms-overflow-style: none; }
+*::-webkit-scrollbar { display: none; }

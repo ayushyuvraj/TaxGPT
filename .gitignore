@@ -1,0 +1,31 @@
+# Environment
+.env
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Data (too large, generated, or sensitive)
+data/pdfs/
+# data/faiss_index/ — COMMITTED to git after first build for instant app startup
+data/*.pkl
+data/*.npy
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+*.log
+
+# Dev tool artifacts (Claude Code, Playwright MCP, pip temp)
+.claude/
+.playwright-mcp/
+.tmp/
+
+# Other project clones (not part of this repo)
+Intelligence-Platform/
